@@ -14,5 +14,5 @@ Ext.application({
     ],
 
     // The name of the initial view to create.
-    mainView: 'SSJT.view.main.Main'
+    //mainView: 'SSJT.view.main.Main'
 });

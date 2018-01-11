@@ -1,0 +1,73 @@
+$login-color:white;
+$login-background-color:#123d40;
+$login-background-image:url(get-resource-path('images/login-background.jpg'));
+@include panel-ui(
+    $ui:'loginForm',
+    $background-color: $login-color,
+    $body-background-color: $login-color,
+    $body-color:$login-color,
+    $body-padding:24px
+);
+.login{
+    @include background-size(cover);
+    background-image: $login-background-image;
+    background-position:center;
+    > .x-body-el {
+        background-color: rgba(black, 0.25);
+    }
+
+    .x-formpanel{
+        width:256px;
+        .x-button{
+            margin:$field-vertical-spacing/2 0;
+            .x-big{
+                margin: $field-vertical-spacing-big/2 0;
+            }
+        }
+    }
+    .login-header,.login-footer{
+        color: $login-color;
+        text-align: center;
+        padding: 16px;
+        a{
+            color: $login-color;
+            text-decoration: none;
+        }
+    }
+    .login-header{
+        .logo{
+            @include single-text-shadow;
+            color:$login-color;
+            font-size: 40px;
+            line-height: 1;
+        }
+        .title, .caption{
+            white-space: nowrap;
+        }
+        .title{
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .caption{
+            font-size: 15px;
+            text-transform: uppercase;
+        }
+    }
+    .login-footer{
+        .logo{
+            font-size: 18px;
+            margin-right: 2px;
+            margin-left: -4px;
+            &::before {
+                vertical-align: middle;
+            }
+        }
+        .label {
+            font-weight: bold;
+        }
+    }
+}
+.toolBar-color{
+    background-color: #ececec;
+}
+

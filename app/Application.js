@@ -14,7 +14,13 @@ Ext.define('SSJT.Application', {
             quickTips: true
         }
     },
-
+    defaultToken:'home',
+    viewport:{
+        controller:'viewport'
+    },
+    launch:function(profile){
+        Ext.Viewport.getController().onLaunch();
+    },
     onAppUpdate: function () {
         Ext.Msg.confirm('Application Update', 'This application has an update, reload?',
             function (choice) {

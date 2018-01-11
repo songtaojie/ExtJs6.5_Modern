@@ -11,7 +11,7 @@ Ext.define('SSJT.view.main.Main', {
         'Ext.MessageBox',
         'Ext.layout.Fit'
     ],
-
+    mixins: ['Ext.mixin.Responsive'],
     controller: 'main',
     viewModel: 'main',
 
@@ -20,8 +20,15 @@ Ext.define('SSJT.view.main.Main', {
             iconAlign: 'top'
         }
     },
-
-    tabBarPosition: 'bottom',
+    responsiveConfig:{
+        tall: {
+            tabBarPosition: 'bottom'
+        },
+        wide: {
+            tabBarPosition: 'left'
+        },
+    },
+   // tabBarPosition: 'bottom',
 
     items: [
         // TODO - Replace the content of this view to suit the needs of your application.
