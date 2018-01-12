@@ -1,5 +1,5 @@
 $app-name:  dynamic( 'SSJT' );
-$image-search-path: 'F:/MyProject/Ext/ExtJs6.5_Modern/build/development/SSJT/resources';
+$image-search-path: 'F:/C_Project/Git/Source/ExtJs6.5/ExtJs6.5_Modern/build/development/SSJT/resources';
 $theme-name:  dynamic( 'theme-default' );
 $include-ext-abstractcomponent: dynamic(true);;
 $include-ext-abstractmanager: dynamic(true);;
@@ -760,6 +760,7 @@ $include-ext-viewport-viewport: dynamic(true);;
 $include-ext-viewport-wp: dynamic(true);;
 $include-ext-viewport-windowsphone: dynamic(true);;
 $include-ext-window-window: dynamic(true);;
+$include-mx-util-utils: dynamic(true);;
 $include-ssjt-application: dynamic(true);;
 $include-ssjt-model-base: dynamic(true);;
 $include-ssjt-model-personnel: dynamic(true);;
@@ -773,6 +774,7 @@ $include-ssjt-view-main-main: dynamic(true);;
 $include-ssjt-view-main-maincontroller: dynamic(true);;
 $include-ssjt-view-main-mainmodel: dynamic(true);;
 $include-ssjt-view-viewport-viewportcontroller: dynamic(true);;
+$include-utils: dynamic(true);;
 $output-paths: ("path": "../resources");
 
 /* ======================== ETC ======================== */
@@ -832,6 +834,14 @@ $current-package: 'theme-default';
 $current-resource-root: $theme-default-resource-root;
 $relative-image-path-for-uis: $theme-default-resource-path;
 @import '../../../../../packages/local/theme-default/sass/etc/all';
+
+/* including package MX */
+$MX-resource-root: 'MX' !default;
+$MX-resource-path: 'MX/images' !default;
+$current-package: 'MX';
+$current-resource-root: $MX-resource-root;
+$relative-image-path-for-uis: $MX-resource-path;
+@import '../../../../../packages/local/MX/sass/etc/all';
 
 
 /* ======================== VAR ======================== */

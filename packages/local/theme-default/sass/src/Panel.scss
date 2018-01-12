@@ -41,19 +41,19 @@
     $header-title-padding-big: 20px 24px
 );
 
-@include panel-ui(
-    $ui: 'invalid',
-    $anchor-margin: 0,
-    $anchor-height: 8px,
-    $anchor-width: 12px,
-    $border-color: $invalid-base-color,
-    $border-width: 1px,
-    $border-style: none,
-    $body-background-color: $invalid-base-color,
-    $body-border-style: none,
-    $body-border-width: 0,
-    $body-color: $invalid-text-color
-);
+// @include panel-ui(
+//     $ui: 'invalid',
+//     $anchor-margin: 0,
+//     $anchor-height: 8px,
+//     $anchor-width: 12px,
+//     $border-color: $invalid-base-color,
+//     $border-width: 1px,
+//     $border-style: none,
+//     $body-background-color: $invalid-base-color,
+//     $body-border-style: none,
+//     $body-border-width: 0,
+//     $body-color: $invalid-text-color
+// );
 
 @include panel-ui(
     $ui: 'flat',

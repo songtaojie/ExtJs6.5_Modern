@@ -1,4 +1,96 @@
-/* F:/MyProject/Ext/ExtJs6.5_Modern/app/view/login/Login.scss:11 */
+/* F:/C_Project/Git/Source/ExtJs6.5/ExtJs6.5_Modern/app/view/auth/Login.scss:14 */
+.auth-login {
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-image: url(../resources/images/auth-background.jpg);
+    background-position: center;
+}
+/* F:/C_Project/Git/Source/ExtJs6.5/ExtJs6.5_Modern/app/view/auth/Login.scss:19 */
+.auth-login > .x-body-el {
+    background-color: rgba(0, 0, 0, 0.25);
+}
+/* F:/C_Project/Git/Source/ExtJs6.5/ExtJs6.5_Modern/app/view/auth/Login.scss:23 */
+.auth-login .x-formpanel {
+    width: 256px;
+}
+/* F:/C_Project/Git/Source/ExtJs6.5/ExtJs6.5_Modern/app/view/auth/Login.scss:26 */
+.auth-login .x-formpanel .x-button {
+    margin: 5px 0;
+}
+/* F:/C_Project/Git/Source/ExtJs6.5/ExtJs6.5_Modern/app/view/auth/Login.scss:30 */
+.auth-login .x-formpanel .x-button .x-big {
+    margin: 5px 0;
+}
+/* F:/C_Project/Git/Source/ExtJs6.5/ExtJs6.5_Modern/app/view/auth/Login.scss:36 */
+.auth-login .auth-header,
+.auth-login .auth-footer {
+    color: white;
+    text-align: center;
+    padding: 16px;
+}
+/* F:/C_Project/Git/Source/ExtJs6.5/ExtJs6.5_Modern/app/view/auth/Login.scss:42 */
+.auth-login .auth-header a,
+.auth-login .auth-footer a {
+    color: white;
+    text-decoration: none;
+}
+/* F:/C_Project/Git/Source/ExtJs6.5/ExtJs6.5_Modern/app/view/auth/Login.scss:49 */
+.auth-login .auth-header .logo {
+    text-shadow: 1px #aaa;
+    color: white;
+    font-size: 40px;
+    line-height: 1;
+}
+/* F:/C_Project/Git/Source/ExtJs6.5/ExtJs6.5_Modern/app/view/auth/Login.scss:56 */
+.auth-login .auth-header .title,
+.auth-login .auth-header .caption {
+    white-space: nowrap;
+}
+/* F:/C_Project/Git/Source/ExtJs6.5/ExtJs6.5_Modern/app/view/auth/Login.scss:60 */
+.auth-login .auth-header .title {
+    font-size: 31px;
+    font-weight: bold;
+}
+/* F:/C_Project/Git/Source/ExtJs6.5/ExtJs6.5_Modern/app/view/auth/Login.scss:65 */
+.auth-login .auth-header .caption {
+    font-size: 15px;
+    text-transform: uppercase;
+}
+/* F:/C_Project/Git/Source/ExtJs6.5/ExtJs6.5_Modern/app/view/auth/Login.scss:72 */
+.auth-login .auth-footer .logo {
+    font-size: 18px;
+    margin-right: 2px;
+    margin-left: -4px;
+}
+/* F:/C_Project/Git/Source/ExtJs6.5/ExtJs6.5_Modern/app/view/auth/Login.scss:77 */
+.auth-login .auth-footer .logo::before {
+    vertical-align: middle;
+}
+/* F:/C_Project/Git/Source/ExtJs6.5/ExtJs6.5_Modern/app/view/auth/Login.scss:82 */
+.auth-login .auth-footer .label {
+    font-weight: bold;
+}
+/* F:/C_Project/Git/Source/ExtJs6.5/ExtJs6.5_Modern/ext/modern/theme-neptune/sass/var/Panel.scss:878 */
+.x-panel-loginForm {
+    background-color: white;
+}
+/* F:/C_Project/Git/Source/ExtJs6.5/ExtJs6.5_Modern/ext/modern/theme-neptune/sass/var/Panel.scss:907 */
+.x-panel-loginForm > .x-anchor-el .x-pointer-el {
+    fill: white;
+}
+/* F:/C_Project/Git/Source/ExtJs6.5/ExtJs6.5_Modern/ext/modern/theme-neptune/sass/var/Panel.scss:951 */
+.x-panel-loginForm-body-el {
+    padding: 24px;
+    background-color: white;
+    color: white;
+}
+/* F:/C_Project/Git/Source/ExtJs6.5/ExtJs6.5_Modern/ext/modern/theme-neptune/sass/var/Panel.scss:972 */
+.x-panel-loginForm-boxscroller > .x-boxscroller-body > .x-body-el {
+    border: 0;
+}
+/* F:/C_Project/Git/Source/ExtJs6.5/ExtJs6.5_Modern/app/view/login/Login.scss:11 */
 .login {
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -7,76 +99,72 @@
     background-image: url(../resources/images/login-background.jpg);
     background-position: center;
 }
-/* F:/MyProject/Ext/ExtJs6.5_Modern/app/view/login/Login.scss:15 */
+/* F:/C_Project/Git/Source/ExtJs6.5/ExtJs6.5_Modern/app/view/login/Login.scss:15 */
 .login > .x-body-el {
     background-color: rgba(0, 0, 0, 0.25);
 }
-/* F:/MyProject/Ext/ExtJs6.5_Modern/app/view/login/Login.scss:19 */
+/* F:/C_Project/Git/Source/ExtJs6.5/ExtJs6.5_Modern/app/view/login/Login.scss:19 */
 .login .x-formpanel {
     width: 256px;
 }
-/* F:/MyProject/Ext/ExtJs6.5_Modern/app/view/login/Login.scss:21 */
+/* F:/C_Project/Git/Source/ExtJs6.5/ExtJs6.5_Modern/app/view/login/Login.scss:21 */
 .login .x-formpanel .x-button {
     margin: 5px 0;
 }
-/* F:/MyProject/Ext/ExtJs6.5_Modern/app/view/login/Login.scss:23 */
+/* F:/C_Project/Git/Source/ExtJs6.5/ExtJs6.5_Modern/app/view/login/Login.scss:23 */
 .login .x-formpanel .x-button .x-big {
     margin: 5px 0;
 }
-/* F:/MyProject/Ext/ExtJs6.5_Modern/app/view/login/Login.scss:28 */
+/* F:/C_Project/Git/Source/ExtJs6.5/ExtJs6.5_Modern/app/view/login/Login.scss:28 */
 .login .login-header,
 .login .login-footer {
     color: white;
     text-align: center;
     padding: 16px;
 }
-/* F:/MyProject/Ext/ExtJs6.5_Modern/app/view/login/Login.scss:32 */
+/* F:/C_Project/Git/Source/ExtJs6.5/ExtJs6.5_Modern/app/view/login/Login.scss:32 */
 .login .login-header a,
 .login .login-footer a {
     color: white;
     text-decoration: none;
 }
-/* F:/MyProject/Ext/ExtJs6.5_Modern/app/view/login/Login.scss:38 */
+/* F:/C_Project/Git/Source/ExtJs6.5/ExtJs6.5_Modern/app/view/login/Login.scss:38 */
 .login .login-header .logo {
     text-shadow: 1px #aaa;
     color: white;
     font-size: 40px;
     line-height: 1;
 }
-/* F:/MyProject/Ext/ExtJs6.5_Modern/app/view/login/Login.scss:44 */
+/* F:/C_Project/Git/Source/ExtJs6.5/ExtJs6.5_Modern/app/view/login/Login.scss:44 */
 .login .login-header .title,
 .login .login-header .caption {
     white-space: nowrap;
 }
-/* F:/MyProject/Ext/ExtJs6.5_Modern/app/view/login/Login.scss:47 */
+/* F:/C_Project/Git/Source/ExtJs6.5/ExtJs6.5_Modern/app/view/login/Login.scss:47 */
 .login .login-header .title {
     font-size: 20px;
     font-weight: bold;
 }
-/* F:/MyProject/Ext/ExtJs6.5_Modern/app/view/login/Login.scss:51 */
+/* F:/C_Project/Git/Source/ExtJs6.5/ExtJs6.5_Modern/app/view/login/Login.scss:51 */
 .login .login-header .caption {
     font-size: 15px;
     text-transform: uppercase;
 }
-/* F:/MyProject/Ext/ExtJs6.5_Modern/app/view/login/Login.scss:57 */
+/* F:/C_Project/Git/Source/ExtJs6.5/ExtJs6.5_Modern/app/view/login/Login.scss:57 */
 .login .login-footer .logo {
     font-size: 18px;
     margin-right: 2px;
     margin-left: -4px;
 }
-/* F:/MyProject/Ext/ExtJs6.5_Modern/app/view/login/Login.scss:61 */
+/* F:/C_Project/Git/Source/ExtJs6.5/ExtJs6.5_Modern/app/view/login/Login.scss:61 */
 .login .login-footer .logo::before {
     vertical-align: middle;
 }
-/* F:/MyProject/Ext/ExtJs6.5_Modern/app/view/login/Login.scss:65 */
+/* F:/C_Project/Git/Source/ExtJs6.5/ExtJs6.5_Modern/app/view/login/Login.scss:65 */
 .login .login-footer .label {
     font-weight: bold;
 }
-/* F:/MyProject/Ext/ExtJs6.5_Modern/app/view/login/Login.scss:70 */
-.toolBar-color {
-    background-color: #ececec;
-}
-/* F:/MyProject/Ext/ExtJs6.5_Modern/app/view/main/List.scss:5 */
+/* F:/C_Project/Git/Source/ExtJs6.5/ExtJs6.5_Modern/app/view/main/List.scss:5 */
 .bold {
     /*
  * This file contains styling for the main List view.
