@@ -25,12 +25,12 @@ Ext.define('SSJT.view.login.Login',{
         items: [{
             xtype: 'textfield',
             name: 'username',
-            placeholder: 'Username',
+            placeholder: '用户名',
             required: true
         }, {
             xtype: 'passwordfield',
             name: 'password',
-            placeholder: 'Password',
+            placeholder: '密码',
             required: true
         }, {
             xtype: 'button',
@@ -41,6 +41,7 @@ Ext.define('SSJT.view.login.Login',{
             ui: 'action'
         }]
     },{
+        xtype:'component',
         cls:'login-footer',
         html:
             '<div>Crm</div>'+
