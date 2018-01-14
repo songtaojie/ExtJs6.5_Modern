@@ -75,7 +75,7 @@ Ext.define('MX.util.Utils',{
     },
     /**
      * 根据key删除localStorage存储的值
-     * @param {*String} key 
+     * @param {String} key 
      */
     removeLsItem(key){
         localStorage.removeItem(this.getLsKey(key));
@@ -98,6 +98,116 @@ Ext.define('MX.util.Utils',{
         if(history.replaceState){
             history.replaceState(null,'',hash);
         }
-    }
+    },
+    /**
+     * 静默转向hash地址，不触发路由处理函数
+     * @param {String} hash 
+     */
+    redirectToSilently(hash){
+        if(history.pushState){
+            const me = this,
+                oldToken = Ext.History.getToken();
+                token = hash2Token(hash);
+            history.pushState(null,'',token2Hash(token));
+            Ext.History.hash = token;
+            Ext.route.Router.clearLastTokens(oldToken);
+            Ext.fireEvent('afterroute',null,token);
+        }
+    },
+    /**
+     * #login-->login
+     * @param {String} hash 
+     */
+    hash2Token(hash){
+        return (hash||'').replace(Ext.History.hashRe,'');
+    },
+    token2Hash(token){
+        return token.replace(Ext.History.hashRe,Ext.History.hashbang?'#!':'#');
+    },
+    /**
+     * 消息提示
+     * @param {String} msg 
+     */
+    alert(msg){
+        const message = (msg||'').replace(/(?:<style.*?>)((\n|\r|.)*?)(?:<\/style>)/ig,'');
+        if(Ext.isEmpty(message))Ext.Msg.alert('系统提示',message);
+    },
+    ajax(api,options){
+        if(arguments.length==0){
+            alert('参数解析错误!');
+            return;
+        }
+        _handlerOptions(options);
+        if(options.maskTarget){
+            this.mask(options.maskTarget);
+        }
+    },
+    _handlerOptions(options){
+        const me = this;
+        options = options||{};
+        //遮罩层
+        if(options.maskTarget){
+            if(options.maskTarget==true){
+                options.maskTarget = Ext.Viewport
+            }else if(Ext.isString(options.maskTarget)){
+                options.maskTarget = this.getCmp(options.maskTarget);
+            }
+        }
+        if(options.button){
+            const btns=[],me = this;
+            let bs = options.button;
+            bs = Ext.isArray(bs)?bs:[bs];
+            for(let i = 0;i<bs.length;i++){
+                let b = bs[i];
+                if(Ext.isEmpty(b))continue;
+                btns.push(Ext.isString(b)?Ext.getCmp(b):b);
+            }
+            if(btns.length>0){
+                options.button = btns;
+            }else{
+                delete options.button
+            }
+        }
+        if(options.data){
+            options.params = Ext.apply({},options.params,{
+                data:Ext.encode(options.data)
+            });
+            delete options.data;
+        }
+        options.params = Ext.applyIf({},options.params,this.getApp().getClientInfo());
 
+        // 此ajax请求所关联的component控件，使得控件在destroy时可以abort终止该请求
+        if (!options.ajaxHost || !options.ajaxHost.isComponent || options.ajaxHost.isDestroying) {
+            delete options.ajaxHost;
+        }
+
+        return options;
+    },
+    /**
+     * 
+     * @param {Ext.component} view 视图或者空间
+     * @param {*} msg 遮罩层提示信息
+     */
+    mask(view,msg){
+        const me = this;
+        const  message = msg||'';
+        if(view&&!view.isDestroyed){
+            const mask = me.getLoadMask(message);
+        }
+    },
+    getLoadMask(msg){
+        var mask = this.getCmp('loadmask',true);
+        
+    },
+    /**
+     * 根据小type获取组件
+     * @param {String} xtype 
+     * @param {Boolean} exact 明确查找xtype。若为false，表示任何继承自xtype的组件都会被找到；否则，只找顶层类型为xtype的组件
+     * @returns {Ext.Component}
+     */
+    getCmp(xtype,exact){
+        if(exact===undefined)exact = true;
+        const cmps = Ext.ComponentQuery.query(xtype+exact?'(true)':'');
+        return cmps>=1?cmps[0]:null;
+    }
 });
