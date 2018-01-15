@@ -4,6 +4,7 @@ Ext.define('SSJT.view.viewport.ViewportController',{
     listen:{
         controller:{
             '*':{
+                login:'onLogin',
                 unmatchedroute:'handleUnmatchedRoute'
             }
         }
@@ -13,6 +14,20 @@ Ext.define('SSJT.view.viewport.ViewportController',{
     },
     onLaunch:function(){
         this.originalRoute = SSJT.getApplication().getDefaultToken();
+        // 暂停路由跳转
+        // 先检查用户是否登录(session)
+        Ext.route.Router.suspend();
+
+        Utils.ajax('ajax/OA.UserAuth/CurrentUserInfo', {
+            success(r) {
+                console.log('已经是登录状态', r);
+                me.onUser(r);
+            },
+            callback() {
+                Ext.getBody().removeCls('launching');
+            },
+            maskTarget: false
+        });
     },
     handleUnmatchedRoute:function(route){
         var me = this;
@@ -50,5 +65,26 @@ Ext.define('SSJT.view.viewport.ViewportController',{
     },
     showLoginView:function(){
         this.showView('login');
+    },
+    onLogin:function(user){
+        var me = this,
+            token = Ext.History.getToken();
+            newToken = "";
+        User.setUser(user);
+
+        if (Ext.String.startsWith(token, 'login/returnurl/')) { //有returnurl参数，则转到returnurl
+            newToken = decodeURIComponent(token.substr(16));
+        } else if (!Ext.isEmpty(token) && token != 'login') {
+            newToken = token;
+        }
+
+        if (Ext.isEmpty(newToken)) {
+            newToken = Utils.getApp().getDefaultToken();
+        }
+
+        me.redirectTo(newToken, {
+            replace: true,
+            force: true
+        });
     }
 });

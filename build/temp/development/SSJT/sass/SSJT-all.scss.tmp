@@ -1,6 +1,7 @@
 $app-name:  dynamic( 'SSJT' );
-$image-search-path: 'F:/C_Project/Git/Source/ExtJs6.5/ExtJs6.5_Modern/build/development/SSJT/resources';
+$image-search-path: 'F:/MyProject/Ext/ExtJs6.5_Modern/build/development/SSJT/resources';
 $theme-name:  dynamic( 'theme-default' );
+$include-common-util-user: dynamic(true);;
 $include-ext-abstractcomponent: dynamic(true);;
 $include-ext-abstractmanager: dynamic(true);;
 $include-ext-abstractplugin: dynamic(true);;
@@ -760,6 +761,7 @@ $include-ext-viewport-viewport: dynamic(true);;
 $include-ext-viewport-wp: dynamic(true);;
 $include-ext-viewport-windowsphone: dynamic(true);;
 $include-ext-window-window: dynamic(true);;
+$include-mx-model-valuetext: dynamic(true);;
 $include-mx-util-utils: dynamic(true);;
 $include-ssjt-application: dynamic(true);;
 $include-ssjt-model-base: dynamic(true);;
@@ -767,13 +769,17 @@ $include-ssjt-model-personnel: dynamic(true);;
 $include-ssjt-store-personnel: dynamic(true);;
 $include-ssjt-view-auth-login: dynamic(true);;
 $include-ssjt-view-auth-logincontroller: dynamic(true);;
+$include-ssjt-view-home-home: dynamic(true);;
 $include-ssjt-view-login-login: dynamic(true);;
 $include-ssjt-view-login-logincontroller: dynamic(true);;
 $include-ssjt-view-main-list: dynamic(true);;
 $include-ssjt-view-main-main: dynamic(true);;
 $include-ssjt-view-main-maincontroller: dynamic(true);;
 $include-ssjt-view-main-mainmodel: dynamic(true);;
+$include-ssjt-view-module-module: dynamic(true);;
+$include-ssjt-view-module-modulecontroller: dynamic(true);;
 $include-ssjt-view-viewport-viewportcontroller: dynamic(true);;
+$include-user: dynamic(true);;
 $include-utils: dynamic(true);;
 $output-paths: ("path": "../resources");
 
@@ -842,6 +848,14 @@ $current-package: 'MX';
 $current-resource-root: $MX-resource-root;
 $relative-image-path-for-uis: $MX-resource-path;
 @import '../../../../../packages/local/MX/sass/etc/all';
+
+/* including package Common */
+$Common-resource-root: 'Common' !default;
+$Common-resource-path: 'Common/images' !default;
+$current-package: 'Common';
+$current-resource-root: $Common-resource-root;
+$relative-image-path-for-uis: $Common-resource-path;
+@import '../../../../../packages/Common/sass/etc/all';
 
 
 /* ======================== VAR ======================== */
@@ -1274,3 +1288,11 @@ $current-package: false;
 $current-resource-root: $default-resource-root;
 $relative-image-path-for-uis: $default-resource-path;
 @import '../../../../../app/view/main/List';
+
+/* including scss file adjacent to ..\..\..\..\..\app\view\module\Module.js */
+$default-resource-root: '' !default;
+$default-resource-path: 'images' !default;
+$current-package: false;
+$current-resource-root: $default-resource-root;
+$relative-image-path-for-uis: $default-resource-path;
+@import '../../../../../app/view/module/Module';
