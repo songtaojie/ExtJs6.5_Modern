@@ -14,20 +14,6 @@ Ext.define('SSJT.view.viewport.ViewportController',{
     },
     onLaunch:function(){
         this.originalRoute = SSJT.getApplication().getDefaultToken();
-        // 暂停路由跳转
-        // 先检查用户是否登录(session)
-        Ext.route.Router.suspend();
-
-        Utils.ajax('ajax/OA.UserAuth/CurrentUserInfo', {
-            success(r) {
-                console.log('已经是登录状态', r);
-                me.onUser(r);
-            },
-            callback() {
-                Ext.getBody().removeCls('launching');
-            },
-            maskTarget: false
-        });
     },
     handleUnmatchedRoute:function(route){
         var me = this;
@@ -44,6 +30,7 @@ Ext.define('SSJT.view.viewport.ViewportController',{
         
     },
     handleLoginRoute:function(){
+        debugger
         var session = this.session;
         if(session&&session.isValid()){
             this.redirectTo('',{required:true});
@@ -64,7 +51,7 @@ Ext.define('SSJT.view.viewport.ViewportController',{
         viewport.setActiveItem(view);
     },
     showLoginView:function(){
-        this.showView('login');
+        this.showView('authlogin');
     },
     onLogin:function(user){
         var me = this,

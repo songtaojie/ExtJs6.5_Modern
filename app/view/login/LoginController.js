@@ -17,12 +17,12 @@ Ext.define('SSJT.view.login.LoginController',{
     //    Ext.create({
     //         xtype:'app-main'
     //     });
-        var me = this,
-        btnLogin = me.lookup('btnLogin'),
-        form = me.lookup('form');
+        // var me = this,
+        // btnLogin = me.lookup('btnLogin'),
+        // form = me.lookup('form');
 
-        form.clearErrors();
-        me.fireEvent("login",session);
+        // form.clearErrors();
+        // me.fireEvent("login",session);
     },
     onCancelClick:function(){
         this.getView().hide();
