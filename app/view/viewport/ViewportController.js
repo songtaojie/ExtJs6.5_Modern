@@ -5,7 +5,7 @@ Ext.define('SSJT.view.viewport.ViewportController',{
         controller:{
             '*':{
                 login:'onLogin',
-                unmatchedroute:'handleUnmatchedRoute'
+                //unmatchedroute:'handleUnmatchedRoute'
             }
         }
     },
@@ -53,7 +53,11 @@ Ext.define('SSJT.view.viewport.ViewportController',{
     showLoginView:function(){
         this.showView('authlogin');
     },
+    showMain(){
+        this.showView('app-main');
+    },
     onLogin:function(user){
+        debugger
         var me = this,
             token = Ext.History.getToken();
             newToken = "";

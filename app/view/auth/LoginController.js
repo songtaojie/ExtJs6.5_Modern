@@ -14,20 +14,20 @@ Ext.define('SSJT.view.auth.LoginController', {
         var me = this,
             form = me.lookup('form'),
             values = form.getValues();
+        me.fireEvent('login', {});
+        //form.clearErrors();
 
-        form.clearErrors();
+        //Ext.Viewport.setMasked({ xtype: 'loadmask' });
 
-        Ext.Viewport.setMasked({ xtype: 'loadmask' });
-
-        App.model.Session.login(values.username, values.password)
-            .then(function(session) {
-                me.fireEvent('login', session);
-            })
-            .catch(function(errors) {
-                form.setErrors(App.util.Errors.toForm(errors));
-            })
-            .then(function(session) {
-                Ext.Viewport.setMasked(false);
-            });
+        // App.model.Session.login(values.username, values.password)
+        //     .then(function(session) {
+        //         me.fireEvent('login', session);
+        //     })
+        //     .catch(function(errors) {
+        //         form.setErrors(App.util.Errors.toForm(errors));
+        //     })
+        //     .then(function(session) {
+        //         Ext.Viewport.setMasked(false);
+        //     });
     }
 });

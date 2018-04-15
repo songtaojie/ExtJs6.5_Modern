@@ -43,9 +43,10 @@ Ext.define('SSJT.view.main.Main', {
         },{
             title: 'Users',
             iconCls: 'x-fa fa-user',
-            bind: {
-                html: '{loremIpsum}'
-            }
+           layout:'fit',
+           items:[{
+               xtype:'balances'
+           }]
         },{
             title: 'Groups',
             iconCls: 'x-fa fa-users',
