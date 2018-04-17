@@ -1,0 +1,23 @@
+Ext.define('SSJT.model.Balances',{
+    extend:'Ext.data.Model',
+    fields:[
+        'AccID',//科目编号
+        'AccName',//科目名称
+        'OrignDebit',//期初借方本币
+        'OrignDebitQty',//期初借方数量
+        'OrignCreditQty',//期初贷方数量
+        'CurDebit',//本期借方本币
+        'CurDebitQty',//本期借方数量
+        'CurCredit',//本期贷方本币
+        'CurCreditQty',//本期贷方数量
+        'LastDebit',//期末借方本币
+        'LastDebitQty',//期末借方数量
+        'LastCredit',//期末贷方本币
+        'LastCreditQty',//期末贷方数量
+        'AccDirect',//科目余额方向
+        'YearCredit',//本年累计贷方
+        'YearCreditQty',//本年累计贷方数量
+        'YearDebit',//本年累计借方
+        'YearDebitQty'//本年累计借方数量
+    ]
+})
