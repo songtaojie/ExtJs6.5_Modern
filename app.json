@@ -5,7 +5,7 @@
     "framework": "ext",
     "toolkit": "modern",
     "theme": "theme-default",
-
+    "env": "${build.environment}",
     /**
      * The list of required packages (with optional versions; default is "latest").
      *

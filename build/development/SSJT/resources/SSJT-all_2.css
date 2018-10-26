@@ -72,6 +72,34 @@
 .auth-login .auth-footer .label {
     font-weight: bold;
 }
+/* F:/MyProject/Ext/ExtJs6.5_Modern/app/view/grid/Grid.scss:3 */
+.x-grid .x-horizontal-resize-marker-el {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #919191;
+    height: 1px;
+    z-index: 1;
+}
+/* F:/MyProject/Ext/ExtJs6.5_Modern/app/view/grid/Grid.scss:15 */
+.x-rownumberercell .x-horizontal-resizer-el {
+    content: '';
+    position: absolute;
+    left: 0;
+    /* top: 5px; */
+    bottom: -5px;
+    height: 10px;
+    width: 100%;
+    background-color: transparent;
+    z-index: 1;
+    cursor: row-resize;
+    display: none;
+}
+/* F:/MyProject/Ext/ExtJs6.5_Modern/app/view/grid/Grid.scss:38 */
+.x-grid.x-has-rowresizing .x-rownumberercell .x-horizontal-resizer-el {
+    display: block;
+}
 /* F:/MyProject/Ext/ExtJs6.5_Modern/ext/modern/theme-neptune/sass/var/Panel.scss:878 */
 .x-panel-loginForm {
     background-color: white;
@@ -255,4 +283,29 @@
     background: #67b26f;
     background: -webkit-linear-gradient(to right, #4ca2cd, #67b26f);
     background: linear-gradient(to right, #4ca2cd, #67b26f);
+}
+/* F:/MyProject/Ext/ExtJs6.5_Modern/app/view/pages/ErrorBase.scss:1 */
+.error-page-container {
+    background-image: url('images/error-page-background.jpg');
+    background-size: cover;
+    color: #fff;
+}
+/* F:/MyProject/Ext/ExtJs6.5_Modern/app/view/pages/ErrorBase.scss:6 */
+.error-page-container .x-panel-body-el {
+    background-color: transparent;
+    color: #fff;
+}
+/* F:/MyProject/Ext/ExtJs6.5_Modern/app/view/pages/ErrorBase.scss:12 */
+.error-page-top-text {
+    font-size: 10rem;
+    line-height: 10rem;
+}
+/* F:/MyProject/Ext/ExtJs6.5_Modern/app/view/pages/ErrorBase.scss:16 */
+.error-page-desc {
+    text-align: center;
+    font-size: 1.3rem;
+}
+/* F:/MyProject/Ext/ExtJs6.5_Modern/app/view/report/ReportGrid.scss:2 */
+.report-grid.x-column-lines .x-gridcell {
+    border-right: 1px solid #d0d0d0;
 }
