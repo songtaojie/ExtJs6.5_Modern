@@ -31,7 +31,7 @@ Ext.define('Common.util.User', {
         const extra = user ? user.Extra : null;
         me.digit = extra ? extra.digit : null;
 
-        Ext.Viewport.getViewModel().set('user', user);
+       // Ext.Viewport.getViewModel().set('user', user);
     },
 
 

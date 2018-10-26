@@ -766,13 +766,17 @@ $include-ext-window-window: dynamic(true);;
 $include-mx-model-valuetext: dynamic(true);;
 $include-mx-util-utils: dynamic(true);;
 $include-ssjt-application: dynamic(true);;
+$include-ssjt-model-balances: dynamic(true);;
 $include-ssjt-model-base: dynamic(true);;
 $include-ssjt-model-personnel: dynamic(true);;
 $include-ssjt-model-report: dynamic(true);;
+$include-ssjt-store-balances: dynamic(true);;
 $include-ssjt-store-personnel: dynamic(true);;
 $include-ssjt-store-report: dynamic(true);;
 $include-ssjt-view-auth-login: dynamic(true);;
 $include-ssjt-view-auth-logincontroller: dynamic(true);;
+$include-ssjt-view-book-balances-balances: dynamic(true);;
+$include-ssjt-view-book-balances-balancestable: dynamic(true);;
 $include-ssjt-view-grid-grid: dynamic(true);;
 $include-ssjt-view-grid-cell-rownumberer: dynamic(true);;
 $include-ssjt-view-grid-column-rownumberer: dynamic(true);;
@@ -784,13 +788,10 @@ $include-ssjt-view-main-list: dynamic(true);;
 $include-ssjt-view-main-main: dynamic(true);;
 $include-ssjt-view-main-maincontroller: dynamic(true);;
 $include-ssjt-view-main-mainmodel: dynamic(true);;
-$include-ssjt-view-module-module: dynamic(true);;
-$include-ssjt-view-module-modulecontroller: dynamic(true);;
 $include-ssjt-view-pages-error404: dynamic(true);;
 $include-ssjt-view-pages-errorbase: dynamic(true);;
 $include-ssjt-view-report-grid: dynamic(true);;
 $include-ssjt-view-report-reportgridcontroller: dynamic(true);;
-$include-ssjt-view-viewport-viewportcontroller: dynamic(true);;
 $include-ssjt-view-viewport-viewportmodel: dynamic(true);;
 $include-user: dynamic(true);;
 $include-utils: dynamic(true);;
@@ -1309,14 +1310,6 @@ $current-package: false;
 $current-resource-root: $default-resource-root;
 $relative-image-path-for-uis: $default-resource-path;
 @import '../../../../../app/view/main/List';
-
-/* including scss file adjacent to ..\..\..\..\..\app\view\module\Module.js */
-$default-resource-root: '' !default;
-$default-resource-path: 'images' !default;
-$current-package: false;
-$current-resource-root: $default-resource-root;
-$relative-image-path-for-uis: $default-resource-path;
-@import '../../../../../app/view/module/Module';
 
 /* including scss file adjacent to ..\..\..\..\..\app\view\pages\ErrorBase.js */
 $default-resource-root: '' !default;
