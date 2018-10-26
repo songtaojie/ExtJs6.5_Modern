@@ -1,5 +1,12 @@
-#/build
-#bootstrap.*
-#classic.json*
-#modern.json*
+/build
+bootstrap.*
+classic.json*
+modern.json*
 .sencha
+*.log
+*.bak
+
+
+
+
+

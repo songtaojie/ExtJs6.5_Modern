@@ -1,0 +1,40 @@
+
+.#{$prefix}grid {
+    .#{$prefix}horizontal-resize-marker-el {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+
+        background-color: #919191;
+        height: 1px;
+        z-index: 1;
+    }
+}
+
+.#{$prefix}rownumberercell .#{$prefix}horizontal-resizer-el {
+    content: '';
+    position: absolute;
+    left: 0;
+    /* top: 5px; */
+    bottom: -5px;
+    height: 10px;
+    width: 100%;
+    background-color: transparent;
+    z-index: 1;
+    cursor: row-resize;
+    display: none;
+
+    // @if $enable-big {
+    //     .#{$prefix}big & {
+    //         right: -($grid-column-resizer-width-big / 2);
+    //         width: $grid-column-resizer-width-big;
+    //     }
+    // }
+}
+
+// Show the resizer handle if the column is resizable and it's widthed
+// If it is shrinkwrapping, we must resize its children to create its width
+.#{$prefix}grid.#{$prefix}has-rowresizing .#{$prefix}rownumberercell .#{$prefix}horizontal-resizer-el {
+    display: block;
+}

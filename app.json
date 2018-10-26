@@ -4,8 +4,8 @@
     "version": "1.0.0.0",
     "framework": "ext",
     "toolkit": "modern",
-    "theme": "theme-material",
-
+    "theme": "theme-default",
+    "env": "${build.environment}",
     /**
      * The list of required packages (with optional versions; default is "latest").
      *
@@ -16,9 +16,13 @@
      *      ]
      */
     "requires": [
-        "font-awesome"
+        "package-loader",
+        "font-awesome",
+        "modern-locale",
+        "MX",
+        "Common"
     ],
-
+    "locale":"zh_CN",
     /**
      * The relative path to the application's markup file (html, jsp, asp, etc.).
      */

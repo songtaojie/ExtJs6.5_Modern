@@ -1,0 +1,29 @@
+{
+    "name": "modern-locale",
+    "sencha": {
+        "name": "modern-locale",
+        "namespace": "Ext",
+        "type": "code",        
+        "framework": "ext",
+        "toolkit": "modern",
+        "creator": "pushsoft",
+        "summary": "A locale package for Ext JS mordern toolkit",
+        "detailedDescription": "Long description of package",
+        "version": "6.5.2.463",
+        "compatVersion": "6.0.0",
+        "format": "1",
+        "output": "${package.dir}/build",
+        "local": true,
+        "build": {
+            "dir": "${package.output}"
+        },
+        "sass": {
+            "namespace": "Ext",
+            "etc": "${package.dir}/sass/etc/all.scss",
+            "var": "${package.dir}/sass/var",
+            "src": "${package.dir}/sass/src"
+        },
+        "classpath": "${package.dir}/src",
+        "overrides": "${package.dir}/overrides/${package.locale}"
+    }
+}
