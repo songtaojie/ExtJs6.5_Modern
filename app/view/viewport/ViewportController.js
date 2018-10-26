@@ -7,7 +7,7 @@ Ext.define('SSJT.view.viewport.ViewportController', {
     
             'SSJT.view.pages.Error404',
             'SSJT.view.login.Login',
-            'SSJT.view.module.Module',
+            // 'SSJT.view.module.Module',
         ],
     
         listen: {
