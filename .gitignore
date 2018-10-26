@@ -5,8 +5,7 @@ modern.json*
 .sencha
 *.log
 *.bak
-packages/**/build
-packages/remote
+
 
 
 
