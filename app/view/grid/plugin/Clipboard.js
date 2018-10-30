@@ -17,7 +17,9 @@ Ext.define('SSJT.view.grid.plugin.Clipboard', {
             selection = selectable && selectable.getSelection(),
             row, sourceRowIdx, sourceColIdx, column, record, columnIndex, recordIndex,
             dataObject, destination, dataIndex, startColumnIndex, startRecordIndex;
-
+        if(colCount === 0 && recCount >1 && values[0].length === 0) {
+            colCount = values[1].length;
+        }
         if (maxRowIdx <= 0 || maxColIdx <= 0) {
             return;
         }

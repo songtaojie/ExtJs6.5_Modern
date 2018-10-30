@@ -115,206 +115,206 @@ Ext.define('SSJT.view.report.Grid', {
                 align:'left'
             },
             width: 75
-        },{
-            text: 'G',
-            editable:true,
-            groupable: false,
-            dataIndex: 'G', 
-            align:'center',
-            cell:{
-                align:'left'
-            },
-             width: 75
-        },{
-            text: 'H', 
-            editable:true,
-            groupable: false,
-            dataIndex: 'H',
-            align:'center',
-            cell:{
-                align:'left'
-            }, 
-            width: 75
-        },{
-            text: 'I',
-            editable:true, 
-            groupable: false,
-            dataIndex: 'I',
-            align:'center',
-            cell:{
-                align:'left'
-            },
-            width: 75
-        },{
-            text: 'J', 
-            editable:true,
-            groupable: false,
-            dataIndex: 'J',
-            align:'center', 
-            cell:{
-                align:'left'
-            },
-            width: 75
-        },{
-            text: 'K',
-            editable:true, 
-            groupable: false,
-            dataIndex: 'K', 
-            align:'center',
-            cell:{
-                align:'left'
-            },
-            width: 75
-        },{
-            text: 'L', 
-            editable:true,
-            groupable: false,
-            dataIndex: 'L', 
-            align:'center',
-            cell:{
-                align:'left'
-            },
-            width: 75
-        },{
-            text: 'M', 
-            editable:true,
-            groupable: false,
-            dataIndex: 'M', 
-            align:'center',
-            cell:{
-                align:'left'
-            },
-            width: 75
-        },{
-            text: 'N',
-            editable:true, 
-            groupable: false,
-            dataIndex: 'N', 
-            align:'center',
-            cell:{
-                align:'left'
-            },
-            width: 75
-        },{
-            text: 'O',
-            editable:true,
-            groupable: false,
-            dataIndex: 'O', 
-            align:'center',
-            cell:{
-                align:'left'
-            },
-            width: 75
-        },{
-            text: 'P', 
-            editable:true,
-            groupable: false,
-            dataIndex: 'P', 
-            align:'center',
-            cell:{
-                align:'left'
-            },
-            width: 75
-        },{
-            text: 'Q', 
-            editable:true,
-            groupable: false,
-            dataIndex: 'Q', 
-            align:'center',
-            cell:{
-                align:'left'
-            },
-            width: 75
-        },{
-            text: 'R',
-            editable:true, 
-            groupable: false,
-            dataIndex: 'R', 
-            align:'center',
-            cell:{
-                align:'left'
-            },
-            width: 75
-        },{
-            text: 'S', 
-            editable:true,
-            groupable: false,
-            dataIndex: 'S',
-            align:'center',
-            cell:{
-                align:'left'
-            }, 
-            width: 75
-        },{
-            text: 'T', 
-            editable:true,
-            groupable: false,
-            dataIndex: 'T', 
-            align:'center',
-            cell:{
-                align:'left'
-            },
-            width: 75
-        },{
-            text: 'U',
-            editable:true,
-            groupable: false, 
-            dataIndex: 'U', 
-            align:'center',
-            cell:{
-                align:'left'
-            },
-            width: 75
-        },{
-            text: 'V',
-            editable:true, 
-            groupable: false,
-            dataIndex: 'V', 
-            align:'center',
-            cell:{
-                align:'left'
-            },
-            width: 75
-        },{
-            text: 'W',
-            editable:true, 
-            groupable: false,
-            dataIndex: 'W', 
-            align:'center',
-            cell:{
-                align:'left'
-            },
-            width: 75
-        },{
-            text: 'X', 
-            editable:true,
-            groupable: false,
-            dataIndex: 'X', 
-            align:'center',
-            cell:{
-                align:'left'
-            },
-            width: 75
-        },{
-            text: 'Y',
-            editable:true, 
-            groupable: false,
-            dataIndex: 'Y',
-            align:'center',
-            cell:{
-                align:'left'
-            },
-             width: 75
-        },{
-            text: 'Z', 
-            editable:true,
-            groupable: false,
-            dataIndex: 'Z',
-            align:'center',
-            cell:{
-                align:'left'
-            }, 
-            width: 75
+        // },{
+        //     text: 'G',
+        //     editable:true,
+        //     groupable: false,
+        //     dataIndex: 'G', 
+        //     align:'center',
+        //     cell:{
+        //         align:'left'
+        //     },
+        //      width: 75
+        // },{
+        //     text: 'H', 
+        //     editable:true,
+        //     groupable: false,
+        //     dataIndex: 'H',
+        //     align:'center',
+        //     cell:{
+        //         align:'left'
+        //     }, 
+        //     width: 75
+        // },{
+        //     text: 'I',
+        //     editable:true, 
+        //     groupable: false,
+        //     dataIndex: 'I',
+        //     align:'center',
+        //     cell:{
+        //         align:'left'
+        //     },
+        //     width: 75
+        // },{
+        //     text: 'J', 
+        //     editable:true,
+        //     groupable: false,
+        //     dataIndex: 'J',
+        //     align:'center', 
+        //     cell:{
+        //         align:'left'
+        //     },
+        //     width: 75
+        // },{
+        //     text: 'K',
+        //     editable:true, 
+        //     groupable: false,
+        //     dataIndex: 'K', 
+        //     align:'center',
+        //     cell:{
+        //         align:'left'
+        //     },
+        //     width: 75
+        // },{
+        //     text: 'L', 
+        //     editable:true,
+        //     groupable: false,
+        //     dataIndex: 'L', 
+        //     align:'center',
+        //     cell:{
+        //         align:'left'
+        //     },
+        //     width: 75
+        // },{
+        //     text: 'M', 
+        //     editable:true,
+        //     groupable: false,
+        //     dataIndex: 'M', 
+        //     align:'center',
+        //     cell:{
+        //         align:'left'
+        //     },
+        //     width: 75
+        // },{
+        //     text: 'N',
+        //     editable:true, 
+        //     groupable: false,
+        //     dataIndex: 'N', 
+        //     align:'center',
+        //     cell:{
+        //         align:'left'
+        //     },
+        //     width: 75
+        // },{
+        //     text: 'O',
+        //     editable:true,
+        //     groupable: false,
+        //     dataIndex: 'O', 
+        //     align:'center',
+        //     cell:{
+        //         align:'left'
+        //     },
+        //     width: 75
+        // },{
+        //     text: 'P', 
+        //     editable:true,
+        //     groupable: false,
+        //     dataIndex: 'P', 
+        //     align:'center',
+        //     cell:{
+        //         align:'left'
+        //     },
+        //     width: 75
+        // },{
+        //     text: 'Q', 
+        //     editable:true,
+        //     groupable: false,
+        //     dataIndex: 'Q', 
+        //     align:'center',
+        //     cell:{
+        //         align:'left'
+        //     },
+        //     width: 75
+        // },{
+        //     text: 'R',
+        //     editable:true, 
+        //     groupable: false,
+        //     dataIndex: 'R', 
+        //     align:'center',
+        //     cell:{
+        //         align:'left'
+        //     },
+        //     width: 75
+        // },{
+        //     text: 'S', 
+        //     editable:true,
+        //     groupable: false,
+        //     dataIndex: 'S',
+        //     align:'center',
+        //     cell:{
+        //         align:'left'
+        //     }, 
+        //     width: 75
+        // },{
+        //     text: 'T', 
+        //     editable:true,
+        //     groupable: false,
+        //     dataIndex: 'T', 
+        //     align:'center',
+        //     cell:{
+        //         align:'left'
+        //     },
+        //     width: 75
+        // },{
+        //     text: 'U',
+        //     editable:true,
+        //     groupable: false, 
+        //     dataIndex: 'U', 
+        //     align:'center',
+        //     cell:{
+        //         align:'left'
+        //     },
+        //     width: 75
+        // },{
+        //     text: 'V',
+        //     editable:true, 
+        //     groupable: false,
+        //     dataIndex: 'V', 
+        //     align:'center',
+        //     cell:{
+        //         align:'left'
+        //     },
+        //     width: 75
+        // },{
+        //     text: 'W',
+        //     editable:true, 
+        //     groupable: false,
+        //     dataIndex: 'W', 
+        //     align:'center',
+        //     cell:{
+        //         align:'left'
+        //     },
+        //     width: 75
+        // },{
+        //     text: 'X', 
+        //     editable:true,
+        //     groupable: false,
+        //     dataIndex: 'X', 
+        //     align:'center',
+        //     cell:{
+        //         align:'left'
+        //     },
+        //     width: 75
+        // },{
+        //     text: 'Y',
+        //     editable:true, 
+        //     groupable: false,
+        //     dataIndex: 'Y',
+        //     align:'center',
+        //     cell:{
+        //         align:'left'
+        //     },
+        //      width: 75
+        // },{
+        //     text: 'Z', 
+        //     editable:true,
+        //     groupable: false,
+        //     dataIndex: 'Z',
+        //     align:'center',
+        //     cell:{
+        //         align:'left'
+        //     }, 
+        //     width: 75
         }],
         
         items: [{
@@ -412,6 +412,21 @@ Ext.define('SSJT.view.report.Grid', {
         }, {
             text:'读取数据',
             handler:'onReadData'
+        }, {
+            text:'保存',
+            handler:'onSave'
         }]
-    }]
+    }],
+    initialize() {
+        const me = this,
+            grid = me.lookup('selectionGrid'),
+            header = grid.getHeaderContainer();
+        me.callParent(arguments);
+        grid.bodyElement.on({
+            contextmenu: 'onContextMenu',
+        });
+        header.bodyElement.on({
+            contextmenu: 'onContextMenu',
+        });
+    }
 });
