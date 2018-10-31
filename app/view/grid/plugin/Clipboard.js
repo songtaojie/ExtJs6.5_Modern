@@ -33,7 +33,6 @@ Ext.define('SSJT.view.grid.plugin.Clipboard', {
 
         startColumnIndex = destination ? destination.columnIndex : 0;
         startRecordIndex = destination ? destination.recordIndex : 0;
-
         for (sourceRowIdx = 0; sourceRowIdx < recCount; sourceRowIdx++) {
             row = values[sourceRowIdx];
             recordIndex = startRecordIndex + sourceRowIdx;

@@ -17,10 +17,6 @@ Ext.define('SSJT.view.grid.cell.RowNumberer', {
 
         return template;
     },
-    initialize(){
-        this.callParent(arguments);
-        debugger
-    },
     afterRender(){
         const me = this;
         me.callParent(arguments);  

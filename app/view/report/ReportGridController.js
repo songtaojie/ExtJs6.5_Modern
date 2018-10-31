@@ -5,7 +5,14 @@ Ext.define('SSJT.view.report.ReportGridController', {
     getSelectable: function () {
         return this.lookup('selectionGrid').getSelectable();
     },
-
+    /**
+     * 文本渲染时
+     */
+    onRenderer(value) {
+        if(Ext.isEmpty(value))return value;
+        return value.replace(new RegExp(' ','g'), '&nbsp;');
+    },
+    
     onSelectionChange: function (grid, records, selecting, selection) {
         var status = this.lookup('status'),
             message = '??',
@@ -26,6 +33,7 @@ Ext.define('SSJT.view.report.ReportGridController', {
             if(selection.startCell) {
                 var cell = selection.startCell.cell;
                 value = cell.getValue() || '';
+                value = value.replace(new RegExp(' ','g'), '&nbsp;');
                 value = '<span style="font-weight:bold;">'+value+'</span>';
                 startDataIndex = cell.dataIndex;
             }
@@ -58,11 +66,13 @@ Ext.define('SSJT.view.report.ReportGridController', {
         var status = this.lookup('status'),
             html = status.getHtml() || '',
             newHtml;
+        if(!Ext.isEmpty(value)) {
+            value = value.replace(new RegExp(' ','g'), '&nbsp;');
+        }
         newHtml = html.substring(0,html.indexOf('>') + 1) + value + html.substring(html.lastIndexOf('</'));
         status.setHtml(newHtml);
     },
     onSelectableChange: function (menuitem, checked) {
-        debugger
         var sel = this.getSelectable(),
             fn = menuitem.fn;
 
@@ -295,6 +305,7 @@ Ext.define('SSJT.view.report.ReportGridController', {
                 rowIndex,
                 colIndex,
                 record,
+                column,
                 columnName,
                 d;
             if(maxRowIndex <=0 || maxColumnIndex <= 0)return;
@@ -305,12 +316,14 @@ Ext.define('SSJT.view.report.ReportGridController', {
                 if(rowIndex < 0 || rowIndex > maxRowIndex)continue;
                 record = store.getAt(rowIndex);
                 columnName = me.getDataIndexForCode(colIndex);
-                record && record.set(columnName,'#='+d.Formula);
+                column = grid.getColumns(`gridcolumn[text=${columnName}]`)[0];
+                record && record.set(column?column.getDataIndex() : columnName,d.Formula);
             }
         }
     },
     onReadData() {
         var me = this,
+            view = me.getView(),
             fields = ['Formula','RowIndex','ColIndex'];
         Utils.ajax('ajax/Financial.VoucherView/GetInfo', {
             data:{
@@ -321,7 +334,8 @@ Ext.define('SSJT.view.report.ReportGridController', {
                 if(r){
                     me.fillValue(r.data);
                 }
-            }
+            },
+            maskTarget:view
         });
 
     },
@@ -334,11 +348,14 @@ Ext.define('SSJT.view.report.ReportGridController', {
             idFieldName,
             result = [];
         var dialog = Ext.create({
-            xtype:'result_dialog'
-        }),
+                xtype:'result_dialog'
+            }),
             diaGrid = dialog.down('grid'),
             diaStore = diaGrid.getStore(),
-            diaModel;
+            diaModel,
+            colName,
+            column,
+            keyColumnNameMap = {};
         diaStore.removeAll();
         store.each(r => {
             if(r.isDirty()) {
@@ -346,7 +363,15 @@ Ext.define('SSJT.view.report.ReportGridController', {
                 rowIndex = grid.mapToRecordIndex(r) + 1;
                 Ext.Object.each(r.getData(), function(key, value) {
                     if(key !== idFieldName) {
-                        colIndex = me.getExcelCol(key);
+                        if(!keyColumnNameMap.hasOwnProperty(key)) {
+                            column = grid.getColumnForField(key);
+                            keyColumnNameMap[key] = key;
+                            if(column.getText() !== key) {
+                                keyColumnNameMap[key] = column.getText();
+                            }
+                        }
+                        colName = keyColumnNameMap[key];
+                        colIndex = me.getExcelCol(colName);
                         diaModel = diaStore.createModel({
                             RowIndex:rowIndex,
                             ColIndex:colIndex,
@@ -363,68 +388,123 @@ Ext.define('SSJT.view.report.ReportGridController', {
         diaStore.add(result);
         dialog.show();
     },
+    /**
+     * 右键菜单事件
+     * @param {*} e 
+     * @param {*} el 
+     */
     onContextMenu(e, el) {
         const me = this,
             com = Ext.Component.from(el),
             grid = me.lookup('selectionGrid');
         if(com && com.isGridColumn || com.isGridCell) {
-            const selectable = grid.getSelectable(),
+            const sel = grid.getSelectable(),
+                selCount = sel.getSelectionCount(),
+                selection = sel.getSelection(),
                 status = {
                     insertRow:false,
-                    insertColumn:false
+                    insertColumn:false,
+                    mergeCell : false
                 };
-            grid.deselectAll();
             if(com.isGridColumn) {
-                selectable.selectColumn(com);
+                var reSelectCol = true;
+                if(selection.isColumns && selCount >=1) {
+                    const selColumns = selection.getColumns();
+                    reSelectCol = selColumns.indexOf(com) < 0;
+                }
+                if(reSelectCol) {
+                    grid.deselectAll();
+                    sel.selectColumn(com);
+                }
                 status.insertColumn = true;
             }else if(com.isGridCell) {
                 const cell = com,
                     idx = grid.getItemIndex(el),
                     record = grid.getStore().getAt(idx);
                 if(cell.hasCls('x-rownumberercell')) {
-                    grid.select(record, false);
+                    var reSelectRow = true;
+                    if(selection.isRows && selCount >= 1) {
+                        const records = selection.getRecords();
+                        reSelectRow = records.indexOf(record) < 0;
+                    }
+                    if(reSelectRow) {
+                        grid.deselectAll();
+                        grid.select(record, false);
+                    }
                     status.insertRow = true;
                 }else {
+                    var seSelectCell = true,
+                        range = selection.getRowRange();;
+                    if(selection.isCells && selCount >= 1) {
+                        selection.eachCell(l => {
+                            if(l.cell === cell) {
+                                seSelectCell = false;
+                                return false;
+                            }
+                        });
+                    }
+                    if(seSelectCell) {
+                        const location = me.getGridLocation(cell);
+                        grid.deselectAll();
+                        sel.selectCells(location, location);
+                    }
                     status.insertRow = true;
                     status.insertColumn = true;
-                    const location = me.getGridLocation(cell);
-                    selectable.selectCells(location, location);
+                    if(selCount > 1 && range[0] === range[1]){
+                        status.mergeCell = true;
+                    }
                 }
             }
             me._showCtxMenu(e.pageX, e.pageY, status);
             e.preventDefault();
         }
-           
-            
     },
+    /**
+     * 显示右键菜单，以及上面的一些功能
+     * @param {*} x 
+     * @param {*} y 
+     * @param {*} status 
+     */
     _showCtxMenu(x, y, status) {
         status = status || {};
         var me = this,
             menu = Ext.create('Ext.menu.Menu', {
             indented:false,
+            defaults:{
+                scope:me,
+            },
             items:[{
                 text:'插入行',
                 handler:'onInsertRow',
                 hidden:status.insertRow !== true,
-                scope:me
             }, {
                 text:'插入列',
                 hidden:status.insertColumn !== true,
                 handler:'onInsertColumn',
-                scope:me
             },{
                 text:'复制',
                 handler:'onCopyData',
-                scope:me
+                hidden:true
             },{
                 text:'剪切',
                 handler:'onCutData',
-                scope:me
+                scope:me,
+                hidden:true
+            }, {
+                text:'合并单元格',
+                handler:'mergeGridCells',
+                hidden:status.mergeCell !== true
+            }, {
+                text:'取消合并单元格',
+                handler:'cancelMergeGridCell',
             }]
         });
         const region = new Ext.util.Region(y, x + 1, y + 1, x);
         menu.showBy(region, 'tl-bl?');
     },
+    /**
+     * 复制数据
+     */
     onCopyData() {
         var me = this,
             grid = me.lookup('selectionGrid'),
@@ -433,6 +513,9 @@ Ext.define('SSJT.view.report.ReportGridController', {
             clipboard.doCutCopy(null,false);
         }
     },
+    /**
+     * 剪切数据
+     */
     onCutData() {
         var me = this,
             grid = me.lookup('selectionGrid'),
@@ -441,6 +524,9 @@ Ext.define('SSJT.view.report.ReportGridController', {
             clipboard.doCutCopy(null,true);
         }
     },
+    /**
+     * 插入一行数据
+     */
     onInsertRow() {
         var me = this,
             grid = me.lookup('selectionGrid'),
@@ -448,14 +534,159 @@ Ext.define('SSJT.view.report.ReportGridController', {
             selection = selectable.getSelection();
         if(selection.isRows || selection.isCells) {
             const store = grid.getStore(),
-                index = selection.getFirstRowIndex();
+                index = selection.getLastRowIndex();
             store.insert(index + 1, store.createModel({}));
         }
     },
-    onInsertColumn() {
+    /**
+     * 是用这种方式进行插入，再插入列后，只修改text即表头的显示字母，不修改dataIndex，这样
+     * 就不用管从插入列到最后的那些列在移动时数据的移动了
+     * 这样在数据解析的时候，列索引我们就根据text来进行设置
+     */
+    onInsertColumn(){
         var me = this,
             grid = me.lookup('selectionGrid'),
             selectable = grid.getSelectable(),
+            selection = selectable.getSelection(),
+            allColumn = grid.getColumns(),
+            column;
+        if(selection.isColumns){
+            column = selection.getColumns()[selection.getCount() - 1];
+        }else if(selection.isCells) {
+            const firstColumnIndex = selection.getLastColumnIndex();
+            column = allColumn[firstColumnIndex];
+        }
+        if(column) {
+            var store = grid.getStore(),
+                model = store.getModel(),
+                columnName = column.getText(),
+                columnIndex = allColumn.indexOf(column),
+                allCount = allColumn.length,
+                lastColumnName = allColumn[allCount - 1].getText(),
+                tempColumn,
+                tempColumnName;
+            for(let i = allCount - 1; i > columnIndex; i--) {
+                tempColumn = allColumn[i];
+                if(tempColumn) {
+                    tempColumnName = tempColumn.getText();
+                    tempNextColumnName = me.getNextColumnName(tempColumnName);
+                    tempColumn.setText(tempNextColumnName);
+                }
+            }
+            const nextColumnName = me.getNextColumnName(columnName),
+                nextDataIndex = me.getNextColumnName(lastColumnName),
+                nextField = model.getField(nextDataIndex);
+            if(nextField == null) {
+                model.addFields([{
+                    name:nextDataIndex,
+                    allowNull:true
+                }]);
+            }
+            grid.insertColumn(columnIndex + 1, {
+                text:nextColumnName,
+                editable:true,
+                dataIndex:nextDataIndex, 
+                width: 75,
+                align:'center',
+                cell:{
+                    align:'left'
+                }          
+            });
+        }
+    },
+    /**
+     * 文本居左显示
+     */
+    onAlignLeft() {
+        const me = this;
+        me.doSetAlign('left');
+    },
+    /**
+     * 文本居zhong显示
+     */
+    onAlignCenter() {
+        const me = this;
+        me.doSetAlign('center');
+    },
+    /**
+     * 文本局右显示
+     */
+    onAlignRight() {
+        const me = this;
+        me.doSetAlign('right');
+    },
+    
+    doSetAlign(align) {
+        var me = this,
+            grid = me.lookup('selectionGrid'),
+            selectable = grid.getSelectable(),
+            selection = selectable.getSelection(),
+            cell,
+            record;
+        selection.eachCell(l=>{
+            record = l.record;
+            cell = l.cell;
+            if(Ext.isEmpty(cell) && !grid.isRecordRendered(record)) {
+                grid.scrollToRecord(record, true);
+                cell = grid.mapToCell(record,l.column);
+            }
+            if(cell) {
+                cell.setAlign(align);
+            }
+        });
+    },
+    /**
+     * 字体加粗
+     */
+    onFontBlod() {
+        var me = this,
+            sel = me.getSelectable(),
+            selection = sel.getSelection(),
+            cell,
+            record,
+            grid;
+        selection.eachCell(l=>{
+            record = l.record;
+            cell = l.cell;
+            grid = l.view;
+            if(Ext.isEmpty(cell) && !grid.isRecordRendered(record)) {
+                grid.scrollToRecord(record, true);
+                cell = grid.mapToCell(record,l.column);
+            }
+            if(cell && !cell.isNumberCell) {
+                cell.addCls('gridcell-font-blod');
+            }
+        });
+    },
+    onRemoveFondBlod() {
+        var me = this,
+            sel = me.getSelectable(),
+            selection = sel.getSelection(),
+            cell,
+            record,
+            grid;
+        selection.eachCell(l=>{
+            record = l.record;
+            cell = l.cell;
+            grid = l.view;
+            if(Ext.isEmpty(cell) && !grid.isRecordRendered(record)) {
+                grid.scrollToRecord(record, true);
+                cell = grid.mapToCell(record,l.column);
+            }
+            cell && cell.removeCls('gridcell-font-blod');
+        });
+    },
+    /**
+     * 插入列时是根据修改每一列的dataIndex来进行插入的（主要是为了对应dataIndex和text，使他们保持一样，
+     * 在数据解析式比较好处理），但是这样在列数据的往后面移动时，不是很好处理，所以换一种方式
+     *
+     * 
+     */
+    onInsertColumn2() {
+        var me = this,
+            grid = me.lookup('selectionGrid'),
+            selectable = grid.getSelectable(),
+            clip = grid.getPlugin("clipboard"),
             selection = selectable.getSelection();
         if(selection.isColumns){
             const column = selection.getColumns()[0];
@@ -471,10 +702,12 @@ Ext.define('SSJT.view.report.ReportGridController', {
                     tempColumnName,
                     tempColumnNames = [],
                     tempNextColumnName,
-                    tempCells;
+                    tempCells,
+                    cutData;
                 for(let i = allCount - 1; i > columnIndex; i--) {
                     tempColumn = allColumn[i];
                     if(tempColumn) {
+                        selectable.selectColumn(tempColumn);
                         tempColumnName = tempColumn.getDataIndex();
                         tempNextColumnName = me.getNextColumnName(tempColumnName);
                         tempNextField =  model.getField(tempNextColumnName);
@@ -484,12 +717,14 @@ Ext.define('SSJT.view.report.ReportGridController', {
                                 allowNull:true
                             }]);
                         }
+                        cutData = clip.getCellData(clip.getSystem(), true);
                         tempColumn.setText(tempNextColumnName);
                         tempColumn.setDataIndex(tempNextColumnName);
                         tempCells = tempColumn.getCells();
                         tempCells.forEach(c => {
                             c.dataIndex = tempNextColumnName;
                         });
+                        clip.putCellData(cutData, clip.getSystem(),i + 1, 0);
                     }
                 }
                 

@@ -49,17 +49,33 @@ Ext.define('SSJT.view.report.Grid', {
         grouped:false,
         columns: [{
             text: 'A',
-            dataIndex: 'A', 
+            dataIndex: 'A',
             editable:true,
             groupable: false,
             // flex: 1, 
             align:'center',
             cell:{
-                align:'left'
+                align:'left',
+                encodeHtml:false,
+                tools: {
+                    // Tools can also be configured using an object.
+                    insert: {
+                        handler: 'onInsertFun',
+                        //tooltip: 'Change settings...',
+                        iconCls:'x-fa fa-facebook-official',
+                        // Cells offer a start or end "zone" for tools:
+                        zone: 'end',
+                        tooltip: '插入函数'
+                        // Use record binding for dynamic configuration:
+                    }
+                }
             },
             width: 75,
+            minWidth:1,
+            renderer:'onRenderer',
             editor:{
                 field:{
+                    xtype:'ssjt_listfind',
                     listeners:{
                         change:'onTextChange'
                     }
@@ -67,254 +83,509 @@ Ext.define('SSJT.view.report.Grid', {
             }
         },{
             text: 'B', 
+            minWidth:1,
             editable:true,
             groupable: false,
             dataIndex: 'B', 
             align:'center',
+            renderer:'onRenderer',
             cell:{
-                align:'left'
+                align:'left',
+                encodeHtml:false
             },
-            width: 75
+            width: 75,
+            editor:{
+                field:{
+                    xtype:'ssjt_listfind',
+                    listeners:{
+                        change:'onTextChange'
+                    }
+                }
+            }
         },{
             text: 'C', 
+            minWidth:1,
             editable:true,
             groupable: false,
             dataIndex: 'C',
             align:'center', 
+            renderer:'onRenderer',
             cell:{
-                align:'left'
+                align:'left',
+                encodeHtml:false
             },
-            width: 75
+            width: 75,
+            editor:{
+                field:{
+                    xtype:'ssjt_listfind',
+                    listeners:{
+                        change:'onTextChange'
+                    }
+                }
+            }
         },{
             text: 'D', 
+            minWidth:1,
             editable:true,
             groupable: false,
             dataIndex: 'D',
             align:'center', 
+            renderer:'onRenderer',
             cell:{
-                align:'left'
+                align:'left',
+                encodeHtml:false
             },
-            width: 75
+            width: 75,
+            editor:{
+                field:{
+                    xtype:'ssjt_listfind',
+                    listeners:{
+                        change:'onTextChange'
+                    }
+                }
+            }
         },{
             text: 'E', 
+            minWidth:1,
             editable:true,
             groupable: false,
             dataIndex: 'E',
             align:'center',
+            renderer:'onRenderer',
             cell:{
-                align:'left'
+                align:'left',
+                encodeHtml:false
             },
-            width: 75
+            width: 75,
+            editor:{
+                field:{
+                    xtype:'ssjt_listfind',
+                    listeners:{
+                        change:'onTextChange'
+                    }
+                }
+            }
         },{
             text: 'F', 
+            minWidth:1,
             editable:true,
             groupable: false,
             dataIndex: 'F',
             align:'center', 
+            renderer:'onRenderer',
             cell:{
-                align:'left'
+                align:'left',
+                encodeHtml:false
             },
-            width: 75
-        // },{
-        //     text: 'G',
-        //     editable:true,
-        //     groupable: false,
-        //     dataIndex: 'G', 
-        //     align:'center',
-        //     cell:{
-        //         align:'left'
-        //     },
-        //      width: 75
-        // },{
-        //     text: 'H', 
-        //     editable:true,
-        //     groupable: false,
-        //     dataIndex: 'H',
-        //     align:'center',
-        //     cell:{
-        //         align:'left'
-        //     }, 
-        //     width: 75
-        // },{
-        //     text: 'I',
-        //     editable:true, 
-        //     groupable: false,
-        //     dataIndex: 'I',
-        //     align:'center',
-        //     cell:{
-        //         align:'left'
-        //     },
-        //     width: 75
-        // },{
-        //     text: 'J', 
-        //     editable:true,
-        //     groupable: false,
-        //     dataIndex: 'J',
-        //     align:'center', 
-        //     cell:{
-        //         align:'left'
-        //     },
-        //     width: 75
-        // },{
-        //     text: 'K',
-        //     editable:true, 
-        //     groupable: false,
-        //     dataIndex: 'K', 
-        //     align:'center',
-        //     cell:{
-        //         align:'left'
-        //     },
-        //     width: 75
-        // },{
-        //     text: 'L', 
-        //     editable:true,
-        //     groupable: false,
-        //     dataIndex: 'L', 
-        //     align:'center',
-        //     cell:{
-        //         align:'left'
-        //     },
-        //     width: 75
-        // },{
-        //     text: 'M', 
-        //     editable:true,
-        //     groupable: false,
-        //     dataIndex: 'M', 
-        //     align:'center',
-        //     cell:{
-        //         align:'left'
-        //     },
-        //     width: 75
-        // },{
-        //     text: 'N',
-        //     editable:true, 
-        //     groupable: false,
-        //     dataIndex: 'N', 
-        //     align:'center',
-        //     cell:{
-        //         align:'left'
-        //     },
-        //     width: 75
-        // },{
-        //     text: 'O',
-        //     editable:true,
-        //     groupable: false,
-        //     dataIndex: 'O', 
-        //     align:'center',
-        //     cell:{
-        //         align:'left'
-        //     },
-        //     width: 75
-        // },{
-        //     text: 'P', 
-        //     editable:true,
-        //     groupable: false,
-        //     dataIndex: 'P', 
-        //     align:'center',
-        //     cell:{
-        //         align:'left'
-        //     },
-        //     width: 75
-        // },{
-        //     text: 'Q', 
-        //     editable:true,
-        //     groupable: false,
-        //     dataIndex: 'Q', 
-        //     align:'center',
-        //     cell:{
-        //         align:'left'
-        //     },
-        //     width: 75
-        // },{
-        //     text: 'R',
-        //     editable:true, 
-        //     groupable: false,
-        //     dataIndex: 'R', 
-        //     align:'center',
-        //     cell:{
-        //         align:'left'
-        //     },
-        //     width: 75
-        // },{
-        //     text: 'S', 
-        //     editable:true,
-        //     groupable: false,
-        //     dataIndex: 'S',
-        //     align:'center',
-        //     cell:{
-        //         align:'left'
-        //     }, 
-        //     width: 75
-        // },{
-        //     text: 'T', 
-        //     editable:true,
-        //     groupable: false,
-        //     dataIndex: 'T', 
-        //     align:'center',
-        //     cell:{
-        //         align:'left'
-        //     },
-        //     width: 75
-        // },{
-        //     text: 'U',
-        //     editable:true,
-        //     groupable: false, 
-        //     dataIndex: 'U', 
-        //     align:'center',
-        //     cell:{
-        //         align:'left'
-        //     },
-        //     width: 75
-        // },{
-        //     text: 'V',
-        //     editable:true, 
-        //     groupable: false,
-        //     dataIndex: 'V', 
-        //     align:'center',
-        //     cell:{
-        //         align:'left'
-        //     },
-        //     width: 75
-        // },{
-        //     text: 'W',
-        //     editable:true, 
-        //     groupable: false,
-        //     dataIndex: 'W', 
-        //     align:'center',
-        //     cell:{
-        //         align:'left'
-        //     },
-        //     width: 75
-        // },{
-        //     text: 'X', 
-        //     editable:true,
-        //     groupable: false,
-        //     dataIndex: 'X', 
-        //     align:'center',
-        //     cell:{
-        //         align:'left'
-        //     },
-        //     width: 75
-        // },{
-        //     text: 'Y',
-        //     editable:true, 
-        //     groupable: false,
-        //     dataIndex: 'Y',
-        //     align:'center',
-        //     cell:{
-        //         align:'left'
-        //     },
-        //      width: 75
-        // },{
-        //     text: 'Z', 
-        //     editable:true,
-        //     groupable: false,
-        //     dataIndex: 'Z',
-        //     align:'center',
-        //     cell:{
-        //         align:'left'
-        //     }, 
-        //     width: 75
+            width: 75,
+            editor:{
+                field:{
+                    xtype:'ssjt_listfind',
+                    listeners:{
+                        change:'onTextChange'
+                    }
+                }
+            }
+        },{
+            text: 'G',
+            minWidth:1,
+            editable:true,
+            groupable: false,
+            dataIndex: 'G', 
+            align:'center',
+            cell:{
+                align:'left',
+                encodeHtml:false
+            },
+             width: 75,
+             editor:{
+                 field:{
+                    xtype:'ssjt_listfind',
+                     listeners:{
+                         change:'onTextChange'
+                     }
+                 }
+             }
+        },{
+            text: 'H', 
+            minWidth:1,
+            editable:true,
+            groupable: false,
+            dataIndex: 'H',
+            align:'center',
+            cell:{
+                align:'left',
+                encodeHtml:false
+            }, 
+            width: 75,
+            editor:{
+                field:{
+                    xtype:'ssjt_listfind',
+                    listeners:{
+                        change:'onTextChange'
+                    }
+                }
+            }
+        },{
+            text: 'I',
+            minWidth:1,
+            editable:true, 
+            groupable: false,
+            dataIndex: 'I',
+            align:'center',
+            cell:{
+                align:'left',
+                encodeHtml:false
+            },
+            width: 75,
+            editor:{
+                field:{
+                    xtype:'ssjt_listfind',
+                    listeners:{
+                        change:'onTextChange'
+                    }
+                }
+            }
+        },{
+            text: 'J', 
+            minWidth:1,
+            editable:true,
+            groupable: false,
+            dataIndex: 'J',
+            align:'center', 
+            cell:{
+                align:'left',
+                encodeHtml:false
+            },
+            width: 75,
+            editor:{
+                field:{
+                    xtype:'ssjt_listfind',
+                    listeners:{
+                        change:'onTextChange'
+                    }
+                }
+            }
+        },{
+            text: 'K',
+            minWidth:1,
+            editable:true, 
+            groupable: false,
+            dataIndex: 'K', 
+            align:'center',
+            cell:{
+                align:'left',
+                encodeHtml:false
+            },
+            width: 75,
+            editor:{
+                field:{
+                    xtype:'ssjt_listfind',
+                    listeners:{
+                        change:'onTextChange'
+                    }
+                }
+            }
+        },{
+            text: 'L', 
+            minWidth:1,
+            editable:true,
+            groupable: false,
+            dataIndex: 'L', 
+            align:'center',
+            cell:{
+                align:'left',
+                encodeHtml:false
+            },
+            width: 75,
+            editor:{
+                field:{
+                    xtype:'ssjt_listfind',
+                    listeners:{
+                        change:'onTextChange'
+                    }
+                }
+            }
+        },{
+            text: 'M', 
+            minWidth:1,
+            editable:true,
+            groupable: false,
+            dataIndex: 'M', 
+            align:'center',
+            cell:{
+                align:'left',
+                encodeHtml:false
+            },
+            width: 75,
+            editor:{
+                field:{
+                    xtype:'ssjt_listfind',
+                    listeners:{
+                        change:'onTextChange'
+                    }
+                }
+            }
+        },{
+            text: 'N',
+            minWidth:1,
+            editable:true, 
+            groupable: false,
+            dataIndex: 'N', 
+            align:'center',
+            cell:{
+                align:'left',
+                encodeHtml:false
+            },
+            width: 75,
+            editor:{
+                field:{
+                    xtype:'ssjt_listfind',
+                    listeners:{
+                        change:'onTextChange'
+                    }
+                }
+            }
+        },{
+            text: 'O',
+            minWidth:1,
+            editable:true,
+            groupable: false,
+            dataIndex: 'O', 
+            align:'center',
+            cell:{
+                align:'left',
+                encodeHtml:false
+            },
+            width: 75,
+            editor:{
+                field:{
+                    xtype:'ssjt_listfind',
+                    listeners:{
+                        change:'onTextChange'
+                    }
+                }
+            }
+        },{
+            text: 'P', 
+            minWidth:1,
+            editable:true,
+            groupable: false,
+            dataIndex: 'P', 
+            align:'center',
+            cell:{
+                align:'left',
+                encodeHtml:false
+            },
+            width: 75,
+            editor:{
+                field:{
+                    xtype:'ssjt_listfind',
+                    listeners:{
+                        change:'onTextChange'
+                    }
+                }
+            }
+        },{
+            text: 'Q', 
+            minWidth:1,
+            editable:true,
+            groupable: false,
+            dataIndex: 'Q', 
+            align:'center',
+            cell:{
+                align:'left',
+                encodeHtml:false
+            },
+            width: 75,
+            editor:{
+                field:{
+                    xtype:'ssjt_listfind',
+                    listeners:{
+                        change:'onTextChange'
+                    }
+                }
+            }
+        },{
+            text: 'R',
+            minWidth:1,
+            editable:true, 
+            groupable: false,
+            dataIndex: 'R', 
+            align:'center',
+            cell:{
+                align:'left',
+                encodeHtml:false
+            },
+            width: 75,
+            editor:{
+                field:{
+                    xtype:'ssjt_listfind',
+                    listeners:{
+                        change:'onTextChange'
+                    }
+                }
+            }
+        },{
+            text: 'S',
+            minWidth:1, 
+            editable:true,
+            groupable: false,
+            dataIndex: 'S',
+            align:'center',
+            cell:{
+                align:'left',
+                encodeHtml:false
+            }, 
+            width: 75,
+            editor:{
+                field:{
+                    xtype:'ssjt_listfind',
+                    listeners:{
+                        change:'onTextChange'
+                    }
+                }
+            }
+        },{
+            text: 'T', 
+            minWidth:1,
+            editable:true,
+            groupable: false,
+            dataIndex: 'T', 
+            align:'center',
+            cell:{
+                align:'left',
+                encodeHtml:false
+            },
+            width: 75,
+            editor:{
+                field:{
+                    xtype:'ssjt_listfind',
+                    listeners:{
+                        change:'onTextChange'
+                    }
+                }
+            }
+        },{
+            text: 'U',
+            minWidth:1,
+            editable:true,
+            groupable: false, 
+            dataIndex: 'U', 
+            align:'center',
+            cell:{
+                align:'left',
+                encodeHtml:false
+            },
+            width: 75,
+            editor:{
+                field:{
+                    xtype:'ssjt_listfind',
+                    listeners:{
+                        change:'onTextChange'
+                    }
+                }
+            }
+        },{
+            text: 'V',
+            minWidth:1,
+            editable:true, 
+            groupable: false,
+            dataIndex: 'V', 
+            align:'center',
+            cell:{
+                align:'left',
+                encodeHtml:false
+            },
+            width: 75,
+            editor:{
+                field:{
+                    xtype:'ssjt_listfind',
+                    listeners:{
+                        change:'onTextChange'
+                    }
+                }
+            }
+        },{
+            text: 'W',
+            minWidth:1,
+            editable:true, 
+            groupable: false,
+            dataIndex: 'W', 
+            align:'center',
+            cell:{
+                align:'left',
+                encodeHtml:false
+            },
+            width: 75,
+            editor:{
+                field:{
+                    xtype:'ssjt_listfind',
+                    listeners:{
+                        change:'onTextChange'
+                    }
+                }
+            }
+        },{
+            text: 'X', 
+            minWidth:1,
+            editable:true,
+            groupable: false,
+            dataIndex: 'X', 
+            align:'center',
+            cell:{
+                align:'left',
+                encodeHtml:false
+            },
+            width: 75,
+            editor:{
+                field:{
+                    xtype:'ssjt_listfind',
+                    listeners:{
+                        change:'onTextChange'
+                    }
+                }
+            }
+        },{
+            text: 'Y',
+            minWidth:1,
+            editable:true, 
+            groupable: false,
+            dataIndex: 'Y',
+            align:'center',
+            cell:{
+                align:'left',
+                encodeHtml:false
+            },
+             width: 75,
+             editor:{
+                 field:{
+                    xtype:'ssjt_listfind',
+                     listeners:{
+                         change:'onTextChange'
+                     }
+                 }
+             }
+        },{
+            text: 'Z',
+            minWidth:1, 
+            editable:true,
+            groupable: false,
+            dataIndex: 'Z',
+            align:'center',
+            cell:{
+                align:'left',
+                encodeHtml:false
+            }, 
+            width: 75,
+            editor:{
+                field:{
+                    xtype:'ssjt_listfind',
+                    listeners:{
+                        change:'onTextChange'
+                    }
+                }
+            }
         }],
         
         items: [{
@@ -398,19 +669,28 @@ Ext.define('SSJT.view.report.Grid', {
         //         }]
         //     }
         // },{
-            text:'插入行',
-            handler:'insertRow'
+            text:'文本左对齐',
+            handler:'onAlignLeft'
         },{
-            text:'插入列',
-            handler:'insertColumn'
+            text:'文本居中',
+            handler:'onAlignCenter'
+        },{
+            text:'文本右对齐',
+            handler:'onAlignRight'
         }, {
-            text:'合并单元格',
-            handler:'mergeGridCells'
-        }, {
-            text:'取消合并单元格',
-            handler:'cancelMergeGridCell'
-        }, {
-            text:'读取数据',
+            text:'字体加粗',
+            handler:'onFontBlod'
+        },{
+            text:'取消加粗',
+            handler:'onRemoveFondBlod'
+        },{
+        //     text:'合并单元格',
+        //     handler:'mergeGridCells'
+        // }, {
+        //     text:'取消合并单元格',
+        //     handler:'cancelMergeGridCell'
+        // }, {
+            text:'读取模板数据',
             handler:'onReadData'
         }, {
             text:'保存',
