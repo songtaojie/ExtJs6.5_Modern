@@ -2,6 +2,7 @@ Ext.define('SSJT.model.Report', {
     extend: 'SSJT.model.Base',
 
     fields: [
+        'BlodColIndexs',
         {
             name:'A',
             allowNull:true

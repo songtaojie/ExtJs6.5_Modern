@@ -20,11 +20,14 @@ Ext.define('SSJT.view.report.Grid', {
         reference: 'selectionGrid',
         userCls:'report-grid',
         shadow: 'true',
-        title: '资产负债表',
+        title: '财务报表',
         columnLines: true,
         itemRipple: false,
         store: {
             type: 'report'
+        },
+        keyMap:{
+            F4:'onGridF4KeyTap'
         },
         selectable: {
             // Disables sorting by header click, though it will be still available via menu
@@ -32,7 +35,7 @@ Ext.define('SSJT.view.report.Grid', {
             cells: true,
             checkbox: false,
             drag: true,
-            extensible: 'y'
+            extensible: 'both'
         },
         // Propagates numeric values when the selection is extended in the Y axis
         plugins: {
@@ -57,22 +60,22 @@ Ext.define('SSJT.view.report.Grid', {
             cell:{
                 align:'left',
                 encodeHtml:false,
-                tools: {
-                    // Tools can also be configured using an object.
-                    insert: {
-                        handler: 'onInsertFun',
-                        //tooltip: 'Change settings...',
-                        iconCls:'x-fa fa-facebook-official',
-                        // Cells offer a start or end "zone" for tools:
-                        zone: 'end',
-                        tooltip: '插入函数'
-                        // Use record binding for dynamic configuration:
-                    }
-                }
+                renderer:'onRenderer',
+                // tools: {
+                //     // Tools can also be configured using an object.
+                //     insert: {
+                //         handler: 'onInsertFun',
+                //         //tooltip: 'Change settings...',
+                //         iconCls:'x-fa fa-facebook-official',
+                //         // Cells offer a start or end "zone" for tools:
+                //         zone: 'end',
+                //         tooltip: '插入函数'
+                //         // Use record binding for dynamic configuration:
+                //     }
+                // }
             },
             width: 75,
             minWidth:1,
-            renderer:'onRenderer',
             editor:{
                 field:{
                     xtype:'ssjt_listfind',
@@ -607,7 +610,7 @@ Ext.define('SSJT.view.report.Grid', {
         },
         defaults: {
             margin: '0 10 0 0',
-            shadow: 'true',
+            // shadow: 'true',
             ui: 'action'
         },
         items: [{
@@ -684,12 +687,20 @@ Ext.define('SSJT.view.report.Grid', {
             text:'取消加粗',
             handler:'onRemoveFondBlod'
         },{
-        //     text:'合并单元格',
-        //     handler:'mergeGridCells'
-        // }, {
-        //     text:'取消合并单元格',
-        //     handler:'cancelMergeGridCell'
-        // }, {
+            text:'插入函数',
+            handler:'onInsertFunc'
+        },{
+            xtype:'component',
+            flex:1
+        },{
+            xtype:'numberfield',
+            label:'模板编号',
+            labelWidth:65,
+            width:180,
+            shadow: false,
+            itemId:'tempNumber',
+            value:6100
+        },{
             text:'读取模板数据',
             handler:'onReadData'
         }, {

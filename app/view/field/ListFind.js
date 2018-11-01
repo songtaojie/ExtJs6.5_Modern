@@ -28,7 +28,8 @@ Ext.define('SSJT.view.field.ListFind', {
         'GetAmountF',
         'GetYearAmountF',
         'GetNetAmountF',
-        'GetYearNetAmountF'
+        'GetYearNetAmountF',
+        'GetValue'
     ],
     picker:'floated',
     triggerAction:'query',
@@ -97,8 +98,8 @@ Ext.define('SSJT.view.field.ListFind', {
             filterFn:function(record) {
                 const query = this.getValue();
                 if(query) {
-                    const v = record.get(valueField),
-                        l = record.get(labelField);
+                    const v = record.get(valueField) || '',
+                        l = record.get(labelField) || '';
                     let valueFilter = false,
                         textFilter = false;
                     if(containValue) {
@@ -111,7 +112,7 @@ Ext.define('SSJT.view.field.ListFind', {
                     }else {
                         textFilter = me.startWith(l, query);
                     }
-                    if(valueFilter || textFilter || !/[^a-z]/i.test(query) && (me.testPinyin(query.toUpperCase(), l, containText) || me.testPinyin(query, v, containValue))) {
+                    if(valueFilter || textFilter || !/[^a-z]/i.test(query) && (me.testPinyin(query.toUpperCase(), l.toUpperCase(), containText) || me.testPinyin(query, v.toUpperCase(), containValue))) {
                         return true;
                     }
 

@@ -8,7 +8,16 @@ Ext.define('SSJT.view.report.ReportGridController', {
     /**
      * 文本渲染时
      */
-    onRenderer(value) {
+    onRenderer(value,record ,dataIndex,cell,column) {
+        //字体加粗
+        const blodColIndexs = record.get('BlodColIndexs');
+        cell.removeCls('gridcell-font-blod');
+        if(!Ext.isEmpty(blodColIndexs)) {
+            const columnText = column.getText();
+           if(blodColIndexs.indexOf(columnText) >= 0) {
+                cell.addCls('gridcell-font-blod');
+           } 
+        }
         if(Ext.isEmpty(value))return value;
         return value.replace(new RegExp(' ','g'), '&nbsp;');
     },
@@ -281,6 +290,7 @@ Ext.define('SSJT.view.report.ReportGridController', {
             grid = me.lookup('selectionGrid'),
             store = grid.getStore();
         if(Ext.isArray(data)) {
+            store.removeAll();
             var itemCount = grid.getItemCount(),
                 maxRowIndex = itemCount;
             data.forEach(d =>{
@@ -291,6 +301,7 @@ Ext.define('SSJT.view.report.ReportGridController', {
                 //     maxColumnCount = d.ColIndex;
                 // }
             });
+            
             if(itemCount < maxRowIndex) {
                 var items = [];
                 for(var i = itemCount;i<maxRowIndex;i++){
@@ -324,10 +335,12 @@ Ext.define('SSJT.view.report.ReportGridController', {
     onReadData() {
         var me = this,
             view = me.getView(),
+            numberField = view.down('#tempNumber'),
             fields = ['Formula','RowIndex','ColIndex'];
+        
         Utils.ajax('ajax/Financial.VoucherView/GetInfo', {
             data:{
-                P1:'6100',
+                P1:numberField.getValue(),
                 P2:fields
             },
             success(r){
@@ -387,6 +400,54 @@ Ext.define('SSJT.view.report.ReportGridController', {
         });
         diaStore.add(result);
         dialog.show();
+    },
+    onGridF4KeyTap() {
+        this.onInsertFunc();
+    },
+    onInsertFunc(){
+        const me = this,
+            sel = me.getSelectable(),
+            selCount = sel.getSelectionCount();
+        if(selCount <=0) {
+            Utils.toastShort('请选择要插入函数的单元格!');
+            return;
+        }
+        let dialog = Utils.getCmp('funcdialog');
+        if(!dialog) {
+            dialog = Ext.create({
+                xtype:'funcdialog',
+                listeners:{
+                    finishediting:{
+                        fn:'onDialogFinish',
+                        scope:me
+                    }
+                }
+            });
+        }
+        const dialogVm = dialog.getViewModel(),
+            selection = sel.getSelection();
+        let cell,
+            textValue;
+        selection.eachCell(l => {
+            cell = l.cell;
+            if(cell) {
+                textValue = cell.getValue();
+                if(!Ext.isEmpty(textValue))return false;
+            }
+        });
+        dialogVm && dialogVm.set('textValue',textValue);
+        dialog.show();
+    },
+    onDialogFinish(dialog,value) {
+        const me = this,
+            sel = me.getSelectable(),
+            selection = sel.getSelection();
+        let dataIndex;
+        selection.eachCell(l => {
+            dataIndex = l.column.getDataIndex();
+            l.record.set(dataIndex, value);
+        });
+        dialog.hide();
     },
     /**
      * 右键菜单事件
@@ -639,24 +700,52 @@ Ext.define('SSJT.view.report.ReportGridController', {
      * 字体加粗
      */
     onFontBlod() {
+        debugger
         var me = this,
             sel = me.getSelectable(),
             selection = sel.getSelection(),
             cell,
             record,
-            grid;
+            recordIndex,
+            grid,
+            boldRecords = {};
         selection.eachCell(l=>{
             record = l.record;
+            recordIndex = l.recordIndex,
             cell = l.cell;
             grid = l.view;
             if(Ext.isEmpty(cell) && !grid.isRecordRendered(record)) {
                 grid.scrollToRecord(record, true);
                 cell = grid.mapToCell(record,l.column);
             }
+            
             if(cell && !cell.isNumberCell) {
-                cell.addCls('gridcell-font-blod');
+                if(!boldRecords.hasOwnProperty(recordIndex)){
+                    boldRecords[recordIndex] = [l.column.getText()];
+                }else {
+                    boldRecords[recordIndex].push(l.column.getText());
+                }
+                // blodColIndexs = record.get('BlodColIndexs');
+                // if(Ext.isEmpty(blodColIndexs)) {
+                //     blodColIndexs = [l.column.getText()];
+                // }else {
+                //     blodColIndexs.push(l.column.getText());
+                // }
+                // record.set('BlodColIndexs',blodColIndexs);
+                // cell.addCls('gridcell-font-blod');
             }
         });
+        if(grid) {
+            const store = grid.getStore();
+            let r;
+            Ext.Object.each(boldRecords,function(key, value) {
+                r = store.getAt(key);
+                if(r) {
+                    r.set('BlodColIndexs',value);
+                }
+            })
+        }
+        
     },
     onRemoveFondBlod() {
         var me = this,
